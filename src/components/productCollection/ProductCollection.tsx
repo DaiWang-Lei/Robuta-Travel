@@ -39,8 +39,8 @@ export const ProductCollection: FC<ProductCollectionProps> = ({ title, sideImage
 
       <Row>
         <Col span={4}>
-          <a href="#">
-            <Image className={styles["side-image"]} src={sideImage} preview={false}></Image>
+          <a href="#" >
+            <Image style={{paddingRight:10}} className={styles["side-image"]} src={sideImage} preview={false}></Image>
           </a>
         </Col>
         <Col span={20}>
