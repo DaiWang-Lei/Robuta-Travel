@@ -1,49 +1,23 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { HomePage } from './pages'
 import styles from './App.module.css';
-import { Col, Row, Typography } from 'antd'
-import { Footer, Header, SideMenu, Carousel, ProductCollection, BusinessPartners } from './components'
-import sideImage1 from './assets/images/sider1.png'
-import sideImage2 from './assets/images/sider2.png'
-import sideImage3 from './assets/images/sider3.png'
-import { productList1, productList2, productList3 } from './mockups'
-import { ProductCollectionProps } from './components/productCollection/ProductCollection';
 
-type prodoctsListsProps = ProductCollectionProps & { type: 'danger' | 'warning' | 'success' }
 
-const prodoctsLists: prodoctsListsProps[] = [
-  { title: '爆款推荐', sideImage: sideImage1, products: productList1, type: 'danger' },
-  { title: '境内旅游', sideImage: sideImage2, products: productList2, type: 'warning' },
-  { title: '出境旅游', sideImage: sideImage3, products: productList3, type: 'success' },
-]
 
 function App() {
   return (
     <div className={styles.App}>
-      <Header />
-      <div className={styles['page-content']}>
-        <Row>
-          <Col span={6}>
-            <SideMenu />
-          </Col>
-          <Col span={18}>
-            <Carousel />
-          </Col>
-        </Row>
-
-          {
-            prodoctsLists.map((item, index) => {
-              return (
-                <ProductCollection
-                  title={<Typography.Title level={3} type={item.type}>{item.title}</Typography.Title>}
-                  sideImage={item.sideImage}
-                  products={item.products}
-                />
-              )
-            })
-          }
-      </div>
-      <BusinessPartners />
-      <Footer />
+      {/* BrowserRouter  路由导航与原生浏览器操作行为一致 */}
+      <BrowserRouter>
+        {/* Switch 路径的切换以页面为单位，不要页面堆叠 */}
+        <Switch>
+          {/* Route 路由的路径解析原理与原生浏览器一致，可以自动识别url路径 */}
+          <Route exact path="/" component={HomePage} />
+          <Route path="/singIn" render={() => (<> <h1>登录页面</h1> </>)} />
+          <Route render={() => (<>404 您访问的资源去流浪了！</>)} />
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
