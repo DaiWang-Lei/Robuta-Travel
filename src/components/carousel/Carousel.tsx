@@ -29,8 +29,9 @@ export const Carousel: FC = () => {
 
   ]
   return (
-    <AntCarousel autoplay className={styles.slider}>
+    <AntCarousel autoplay className={styles.slider} style={{cursor:'pointer'}}>
       {httpImage.map((item, index) => (
+        
           <Image src={item.src} key={`carousel-image-${index}`} preview={false} style={{cursor:'pointer'}} />
       ))}
     </AntCarousel>

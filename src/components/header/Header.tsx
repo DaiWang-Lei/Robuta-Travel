@@ -2,8 +2,17 @@ import React, { FC } from 'react';
 import styles from "./Header.module.css";
 import logo from '../../assets/logo.svg'
 import { Layout, Typography, Input, Dropdown, Menu, Button } from 'antd';
-import { GlobalOutlined } from '@ant-design/icons'
+import { GlobalOutlined } from '@ant-design/icons';
+import { useHistory, useLocation, useParams, useRouteMatch } from 'react-router-dom'
 export const Header: FC = (props) => {
+  // history 导航操作
+  const history = useHistory()
+  // location 当前路径的信息
+  const location = useLocation()
+  // params url中的参数
+  const params = useParams()
+  //match 路径匹配的数据
+  const match = useRouteMatch()
 
   const menuData = [
     { id: 1, label: '旅游首页' },
@@ -47,18 +56,20 @@ export const Header: FC = (props) => {
           </Dropdown.Button>
 
           <Button.Group className={styles['button-group']}>
-            <Button>登录</Button>
-            <Button>注册</Button>
+            <Button onClick={() => { history.push('signIn') }}>登录</Button>
+            <Button onClick={() => { history.push('register') }}>注册</Button>
           </Button.Group>
         </div>
       </div>
 
       {/* 顶部展示 */}
       <Layout.Header className={styles['main-header']}>
-        <img src={logo} alt="" className={styles['App-logo']} />
-        <Typography.Title level={3} className={styles.title}>
-          Robuta旅游网
-        </Typography.Title>
+        <span onClick={() => { history.push('/') }}>
+          <img src={logo} alt="" className={styles['App-logo']} />
+          <Typography.Title level={3} className={styles.title}>
+            Robuta旅游网
+          </Typography.Title>
+        </span>
         <Input.Search placeholder='请输入目的地' className={styles['search-input']} />
       </Layout.Header>
 

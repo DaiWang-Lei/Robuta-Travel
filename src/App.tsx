@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { HomePage } from './pages'
+import { HomePage, SignInPage, RegisterPage, DetailPage } from './pages'
 import styles from './App.module.css';
 
 
@@ -14,7 +14,10 @@ function App() {
         <Switch>
           {/* Route 路由的路径解析原理与原生浏览器一致，可以自动识别url路径 */}
           <Route exact path="/" component={HomePage} />
-          <Route path="/singIn" render={() => (<> <h1>登录页面</h1> </>)} />
+          <Route path="/signIn" component={SignInPage} />
+          <Route path="/register" component={RegisterPage} />
+          <Route path="/detail/:touristRouteId" component={DetailPage} />
+
           <Route render={() => (<>404 您访问的资源去流浪了！</>)} />
         </Switch>
       </BrowserRouter>
