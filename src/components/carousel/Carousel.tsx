@@ -20,12 +20,18 @@ export const Carousel: FC = () => {
     { src: mount },
     { src: cave },
     { src: cloudSea },
+  ]
+  const httpImage = [
+    { src: 'https://dimg04.c-ctrip.com/images/700v0z000000nw0fo1F65.jpg' },
+    { src: 'https://dimg04.c-ctrip.com/images/70020z000000ns1kiD9E9.jpg' },
+    { src: 'https://dimg04.c-ctrip.com/images/70050z000000nngwoAF78.jpg' },
+    { src: 'https://dimg04.c-ctrip.com/images/700v0z000000nw0fo1F65.jpg' },
 
   ]
   return (
     <AntCarousel autoplay className={styles.slider}>
-      {images.map((item, index) => (
-        <Image src={item.src} key={`carousel-image-${index}`} preview={false} />
+      {httpImage.map((item, index) => (
+          <Image src={item.src} key={`carousel-image-${index}`} preview={false} style={{cursor:'pointer'}} />
       ))}
     </AntCarousel>
   )
