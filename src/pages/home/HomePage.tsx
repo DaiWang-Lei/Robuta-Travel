@@ -8,18 +8,22 @@ import sideImage3 from '../../assets/images/sider3.png';
 import styles from './HomePage.module.css'
 import { productList1, productList2, productList3 } from './mockups';
 import { ProductCollectionProps } from '../../components/productCollection/ProductCollection';
+import { useTranslation } from 'react-i18next';
 
 
 type prodoctsListsProps = ProductCollectionProps & { type: 'danger' | 'warning' | 'success' };
 
-const prodoctsLists: prodoctsListsProps[] = [
-  { title: '爆款推荐', sideImage: sideImage1, products: productList1, type: 'danger' },
-  { title: '境内旅游', sideImage: sideImage2, products: productList2, type: 'warning' },
-  { title: '出境旅游', sideImage: sideImage3, products: productList3, type: 'success' },
-]
 
 
 export const HomePage: FC = () => {
+
+  const { t } = useTranslation()
+  const prodoctsLists: prodoctsListsProps[] = [
+    { title: t('home_page.hot_recommended'), sideImage: sideImage1, products: productList1, type: 'danger' },
+    { title: t('home_page.domestic_travel'), sideImage: sideImage2, products: productList2, type: 'warning' },
+    { title: t('home_page.outbound_travel'), sideImage: sideImage3, products: productList3, type: 'success' },
+  ]
+  
   return (
     <div>
       <Header />
@@ -35,6 +39,7 @@ export const HomePage: FC = () => {
 
         {
           prodoctsLists.map((item, index) => {
+          debugger;
             return (
               <ProductCollection
                 title={<Typography.Title level={3} type={item.type}>{item.title}</Typography.Title>}
