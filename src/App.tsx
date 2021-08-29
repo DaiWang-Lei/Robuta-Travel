@@ -1,13 +1,11 @@
-import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { HomePage, SignInPage, RegisterPage, DetailPage } from './pages'
-import styles from './App.module.css';
-
-
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { HomePage, SignInPage, RegisterPage, DetailPage, NotFound } from "./pages";
+import styles from "./App.module.css";
 
 function App() {
   return (
-    <div className={styles.App}>
+    <div>
       {/* BrowserRouter  路由导航与原生浏览器操作行为一致 */}
       <BrowserRouter>
         {/* Switch 路径的切换以页面为单位，不要页面堆叠 */}
@@ -18,7 +16,7 @@ function App() {
           <Route path="/register" component={RegisterPage} />
           <Route path="/detail/:touristRouteId" component={DetailPage} />
 
-          <Route render={() => (<>404 您访问的资源去流浪了！</>)} />
+          <Route component={NotFound} />
         </Switch>
       </BrowserRouter>
     </div>
