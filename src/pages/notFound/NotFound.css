@@ -1,14 +1,4 @@
-body {
-  background: linear-gradient(135deg,#e0e0e0 10%,#ffffff 90%);
-  animation: background 5s linear infinite;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  flex-wrap: wrap;
-  font-family: "Anton", sans-serif;
-  perspective: 1000px;
-  align-items: flex-start;
-}
+
 div {
   transform-style: preserve-3d;
 }

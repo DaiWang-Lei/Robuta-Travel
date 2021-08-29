@@ -7,6 +7,7 @@ export interface ProductCollectionProps {
   title: JSX.Element | string;
   sideImage: string;
   products: any[];
+  touristRoutes?:any[]
 }
 
 
