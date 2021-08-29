@@ -7,6 +7,11 @@ import "antd/dist/antd.css";
 import "./i18n/config";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import axios from 'axios';
+
+// 设置默认的请求头
+axios.defaults.headers['x-icode']='B5052179AFA61ABB';
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
