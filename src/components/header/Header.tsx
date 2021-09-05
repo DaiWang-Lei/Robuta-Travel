@@ -19,8 +19,8 @@ export const Header: FC = (props) => {
   //match 路径匹配的数据
   const match = useRouteMatch();
 
-  const language = useSelector((state) => state.language);
-  const languageList = useSelector((state) => state.languageList);
+  const language = useSelector((state) => state.language.language);
+  const languageList = useSelector((state) => state.language.languageList);
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const menuData = [
@@ -40,7 +40,7 @@ export const Header: FC = (props) => {
     { id: 15, label: t("header.outdoor") },
     { id: 16, label: t("header.insurance") },
   ];
-
+ 
   const MenuHandlerClick = (e: { key: any }) => {
     if (e.key === "new") {
       dispatch(addLanguageActionCreator("newLanguage", "新语言"));

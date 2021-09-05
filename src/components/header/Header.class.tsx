@@ -6,17 +6,17 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Layout, Typography, Input, Dropdown, Menu, Button } from "antd";
 import logo from "../../assets/logo.svg";
 import styles from "./Header.module.css";
-import { RootType } from "../../redux/store";
+import { RootState } from "../../redux/store";
 import { withTranslation, WithTranslation } from "react-i18next";
 import { LanguageState } from "../../redux/language/languageReducer";
 import { addLanguageActionCreator, changeLanguageActionCreator } from "../../redux/language/languageActions";
 
 interface State extends LanguageState {}
 
-const mapStateToProps = (state: RootType) => {
+const mapStateToProps = (state: RootState) => {
   return {
-    language: state.language,
-    languageList: state.languageList,
+    language: state.language.language,
+    languageList: state.language.languageList,
   };
 };
 
