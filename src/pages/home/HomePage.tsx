@@ -25,27 +25,29 @@ export const HomePage: FC = () => {
   const [productList, setProductList] = useState<prodoctsListsProps[]>(defaultProductList);
 
   const getProducts = async () => {
-    const { data } = await axios.get("http://123.56.149.216:8080/api/productCollections", {
-      headers: {
-        "x-icode": "B5052179AFA61ABB",
-      },
-    });
-    if (data) {
-      const customData = data.map((item: prodoctsListsProps) => {
-        const curType = item.id === 1 ? "danger" : item.id === 2 ? "warning" : "success";
-        const curSideImg = item.id === 1 ? sideImage1 : item.id === 2 ? sideImage2 : sideImage3;
+    try {
+      const { data } = await axios.get("http://123.56.149.216:8080/api/productCollections");
+      if (data) {
+        const customData = data.map((item: prodoctsListsProps) => {
+          const curType = item.id === 1 ? "danger" : item.id === 2 ? "warning" : "success";
+          const curSideImg = item.id === 1 ? sideImage1 : item.id === 2 ? sideImage2 : sideImage3;
 
-        return {
-          ...item,
-          products: item.touristRoutes,
-          type: curType,
-          sideImage: curSideImg,
-        };
-      });
-      debugger;
-      setProductList(customData);
+          return {
+            ...item,
+            products: item.touristRoutes,
+            type: curType,
+            sideImage: curSideImg,
+          };
+        });
+        debugger;
+        // setProductList(customData);
+        setLoading(false);
+        setError(null);
+      }
+    } catch (error) {
+      setError(error.message);
       setLoading(false);
-      setError(null);
+      // setProductList(defaultProductList);
     }
   };
   useEffect(() => {
@@ -61,9 +63,9 @@ export const HomePage: FC = () => {
   if (loading) {
     return <Spin size="large" style={{ marginTop: 200, marginBottom: 200, marginLeft: "auto", marginRight: "auto", width: "100%" }} />;
   }
-  if (error) {
-    return <div>{error}</div>;
-  }
+  // if (error) {
+  //   return <div>{error}</div>;
+  // }
   return (
     <div>
       <Header />
