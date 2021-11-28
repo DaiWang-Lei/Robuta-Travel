@@ -74,7 +74,7 @@ export const fetchRecommendProductsFailActionCreator = (error: any): FetchRecomm
 export const getProductsActionCreator = (): ThunkAction<void, RootState, unknown, recommendProductsActions> => async(dispatch, getState) => {
   try {
     dispatch(fetchRecommendProductsStartActionCreator());
-    const { data } = await axios.get("http://123.56.149.216:8080/api/productCollections");
+    const { data } = await axios.get("http://123.56.149.216:8080/api/productList");
     if (data) {
       const customData = data.map((item: ProductsListProps) => {
         const curType = item.id === 1 ? "danger" : item.id === 2 ? "warning" : "success";

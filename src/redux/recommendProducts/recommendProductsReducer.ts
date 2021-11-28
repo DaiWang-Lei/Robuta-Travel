@@ -3,7 +3,6 @@ import {
   FETCH_RECOMMEND_PRODUCTS_START,
   FETCH_RECOMMEND_PRODUCTS_SUCCESS,
   FETCH_RECOMMEND_PRODUCTS_FAIL,
-  
 } from "./recommendProductsActions";
 
 import sideImage1 from "../../assets/images/sider1.png";
@@ -16,6 +15,7 @@ interface RecommendProductsState {
   loading: boolean;
   error: undefined | null;
 }
+
 
 const defaultState: RecommendProductsState = {
   productList: [
