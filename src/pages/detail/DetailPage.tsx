@@ -4,7 +4,10 @@ import axios from "axios";
 import { Spin, DatePicker, Space, Row, Col, Divider, Typography, Anchor, Menu } from "antd";
 import { Footer, Header, ProductIntro, ProductComments } from "@/components";
 import styles from "./Detail.module.css";
-// import { c } from "@/../mock/comments";
+import { getProductDetail,getProductComments } from "@/redux/productDetail/slice";
+import { useDispatch } from "react-redux";
+import { useSelector } from "../../redux/hooks";
+
 const { RangePicker } = DatePicker;
 
 interface MatchProps {
@@ -12,27 +15,21 @@ interface MatchProps {
 }
 export const DetailPage: FC<RouteComponentProps<MatchProps>> = (props) => {
   const { touristRouteId } = useParams<MatchProps>();
-  const [loading, setLoading] = useState<boolean>(true);
-  const [product, setProduct] = useState<any>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [comments, setCommnets] = useState<any[]>([]);
-
+  const loading = useSelector((state) => state.productDetail.loading);
+  const product = useSelector((state) => state.productDetail.data);
+  const error = useSelector((state) => state.productDetail.error);
+  const comments = useSelector((state) => state.productDetail.commnets);
+  const dispatch = useDispatch();
+  
+  //获取产品详情
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const { data } = await axios.get(`/api/touristRoutes/1`);
-        const commentsResult = await axios.get("/api/comments");
-        setCommnets(commentsResult.data);
-        setProduct(data);
-        setLoading(false);
-      } catch (e) {
-        setError(e.message);
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
+    dispatch(getProductDetail(touristRouteId));
+  }, [touristRouteId, dispatch]);
+
+  //获取评论信息
+  useEffect(() => {
+    dispatch(getProductComments());
+  }, [dispatch]);
 
   if (loading) {
     return <Spin size="large" style={{ marginTop: 200, marginBottom: 200, marginLeft: "auto", marginRight: "auto", width: "100%" }} />;
@@ -66,7 +63,12 @@ export const DetailPage: FC<RouteComponentProps<MatchProps>> = (props) => {
           </Row>
         </div>
         {/* 锚点菜单 */}
-        <Anchor className={styles.productDetailAnchor} onClick={(e)=>{e.preventDefault()}}>
+        <Anchor
+          className={styles.productDetailAnchor}
+          onClick={(e) => {
+            e.preventDefault();
+          }}
+        >
           <Menu mode="horizontal">
             <Menu.Item key="1">
               <Anchor.Link href="#features" title="产品特色"></Anchor.Link>
