@@ -4,9 +4,10 @@ import axios from "axios";
 import { Spin, DatePicker, Space, Row, Col, Divider, Typography, Anchor, Menu } from "antd";
 import { Footer, Header, ProductIntro, ProductComments } from "@/components";
 import styles from "./Detail.module.css";
-import { getProductDetail,getProductComments } from "@/redux/productDetail/slice";
+import { getProductDetail, getProductComments } from "@/redux/productDetail/slice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "../../redux/hooks";
+import { MainLayout } from "@/layouts/mainLayout";
 
 const { RangePicker } = DatePicker;
 
@@ -20,7 +21,7 @@ export const DetailPage: FC<RouteComponentProps<MatchProps>> = (props) => {
   const error = useSelector((state) => state.productDetail.error);
   const comments = useSelector((state) => state.productDetail.commnets);
   const dispatch = useDispatch();
-  
+
   //获取产品详情
   useEffect(() => {
     dispatch(getProductDetail(touristRouteId));
@@ -40,8 +41,7 @@ export const DetailPage: FC<RouteComponentProps<MatchProps>> = (props) => {
   }
   return (
     <>
-      <Header />
-      <div className={styles.pageContent}>
+      <MainLayout>
         {/* 产品简介与日期选择 */}
         <div className={styles.productIntroContainer}>
           <Row>
@@ -112,8 +112,7 @@ export const DetailPage: FC<RouteComponentProps<MatchProps>> = (props) => {
           </Divider>
           <ProductComments data={comments} />
         </div>
-      </div>
-      <Footer />
+      </MainLayout>
     </>
   );
 };

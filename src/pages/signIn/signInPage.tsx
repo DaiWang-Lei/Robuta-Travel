@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
+import { UserLayout } from "@/layouts/userLayout";
 
 export const SignInPage = () => {
   return (
-    <div>
+    <UserLayout>
       <h1>登录页面</h1>
-    </div>
-  )
-}
+    </UserLayout>
+  );
+};
 
 export default SignInPage;
-

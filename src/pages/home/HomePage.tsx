@@ -5,13 +5,11 @@ import { Footer, Header, SideMenu, Carousel, ProductCollection, BusinessPartners
 import styles from "./HomePage.module.css";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
-import {
-  ProductsListProps,
-  getProductsActionCreator,
-} from "../../redux/recommendProducts/recommendProductsActions";
+import { ProductsListProps, getProductsActionCreator } from "../../redux/recommendProducts/recommendProductsActions";
 
 import { useSelector } from "../../redux/hooks";
 import { useDispatch } from "react-redux";
+import { MainLayout } from "@/layouts/mainLayout";
 
 export const HomePage: FC = () => {
   const { t } = useTranslation();
@@ -21,7 +19,6 @@ export const HomePage: FC = () => {
   const error = useSelector((state) => state.recommendProducts.error);
   const productList: ProductsListProps[] = useSelector((state) => state.recommendProducts.productList);
   const dispatch = useDispatch();
-
 
   useEffect(() => {
     dispatch(getProductsActionCreator());
@@ -36,8 +33,7 @@ export const HomePage: FC = () => {
   // }
   return (
     <div>
-      <Header />
-      <div className={styles["page-content"]}>
+      <MainLayout>
         <Row>
           <Col span={6}>
             <SideMenu />
@@ -60,9 +56,9 @@ export const HomePage: FC = () => {
             />
           );
         })}
-      </div>
-      <BusinessPartners />
-      <Footer />
+
+        <BusinessPartners />
+      </MainLayout>
     </div>
   );
 };
