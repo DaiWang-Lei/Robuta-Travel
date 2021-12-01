@@ -7,7 +7,7 @@ import { productDetailSlice } from "./productDetail/slice";
 export const rootReducer = combineReducers({
   language: languageReducer,
   recommendProducts: recommendProductsReducer,
-  productDetail: productDetailSlice.reducer, //dif
+  productDetail: productDetailSlice.reducer,
 });
 const store = createStore(rootReducer, applyMiddleware(thunk));
 export type RootState = ReturnType<typeof store.getState>;
