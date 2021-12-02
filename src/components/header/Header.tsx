@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styles from "./Header.module.css";
 import logo from "../../assets/logo.svg";
 import { useDispatch } from "react-redux";
@@ -8,6 +8,16 @@ import { useTranslation } from "react-i18next";
 import { Layout, Typography, Input, Dropdown, Menu, Button } from "antd";
 import { useHistory, useLocation, useParams, useRouteMatch } from "react-router-dom";
 import { addLanguageActionCreator, changeLanguageActionCreator } from "../../redux/language/languageActions";
+import jwtDecode, { JwtPayload as DefaultJwtPayload } from "jwt-decode";
+import { userSlice } from "@/redux/user/slice";
+
+interface MatchParams {
+  keywords: string;
+}
+
+interface JwtPayload extends DefaultJwtPayload {
+  name: string;
+}
 
 export const Header: FC = (props) => {
   // history 导航操作
@@ -21,7 +31,12 @@ export const Header: FC = (props) => {
 
   const language = useSelector((state) => state.language.language);
   const languageList = useSelector((state) => state.language.languageList);
+  const jwt = useSelector((state) => state.user.token);
+  const { keywords } = useParams<MatchParams>();
+  const [userName, setUserName] = useState<string | null>(null);
+
   const dispatch = useDispatch();
+
   const { t } = useTranslation();
   const menuData = [
     { id: 1, label: t("header.weekend") },
@@ -40,7 +55,18 @@ export const Header: FC = (props) => {
     { id: 15, label: t("header.outdoor") },
     { id: 16, label: t("header.insurance") },
   ];
- 
+
+  useEffect(() => {
+    if (jwt) {
+      const token = jwtDecode<JwtPayload>(jwt);
+      setUserName(token.name);
+    }
+  }, [jwt]);
+
+  const onSignOut = () => {
+    dispatch(userSlice.actions.signOut())
+    history.push("/");
+  };
   const MenuHandlerClick = (e: { key: any }) => {
     if (e.key === "new") {
       dispatch(addLanguageActionCreator("newLanguage", "新语言"));
@@ -68,23 +94,39 @@ export const Header: FC = (props) => {
           >
             {language === "en" ? "English" : "中文"}
           </Dropdown.Button>
-
-          <Button.Group className={styles["button-group"]}>
-            <Button
-              onClick={() => {
-                history.push("signIn");
-              }}
-            >
-             {t("header.signin")}
-            </Button>
-            <Button
-              onClick={() => {
-                history.push("register");
-              }}
-            >
-               {t("header.register")}
-            </Button>
-          </Button.Group>
+          {jwt ? (
+            <Button.Group className={styles["button-group"]}>
+              <span style={{marginRight:15}}>
+                {t("header.welcome")}
+                <Typography.Text strong={true}>{userName}</Typography.Text>
+              </span>
+              <Button
+                onClick={() => {
+                  history.push("/shoppingCart");
+                }}
+              >
+                {t("header.shoppingCart")}
+              </Button>
+              <Button onClick={onSignOut}>{t("header.signOut")}</Button>
+            </Button.Group>
+          ) : (
+            <Button.Group className={styles["button-group"]}>
+              <Button
+                onClick={() => {
+                  history.push("signIn");
+                }}
+              >
+                {t("header.signin")}
+              </Button>
+              <Button
+                onClick={() => {
+                  history.push("register");
+                }}
+              >
+                {t("header.register")}
+              </Button>
+            </Button.Group>
+          )}
         </div>
       </div>
 
@@ -97,7 +139,7 @@ export const Header: FC = (props) => {
         >
           <img src={logo} alt="" className={styles["App-logo"]} />
           <Typography.Title level={3} className={styles.title}>
-          {t("header.title")}
+            {t("header.title")}
           </Typography.Title>
         </span>
         <Input.Search placeholder="请输入目的地" className={styles["search-input"]} />

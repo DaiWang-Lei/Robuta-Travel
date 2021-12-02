@@ -6,18 +6,20 @@ import reportWebVitals from "./reportWebVitals";
 import "antd/dist/antd.css";
 import "./i18n/config";
 import { Provider } from "react-redux";
-import store from "./redux/store";
-import axios from 'axios';
-
+import rootStore from "./redux/store";
+import axios from "axios";
+import {PersistGate} from 'redux-persist/integration/react';
 // 设置默认的请求头
-axios.defaults.headers['x-icode']='B5052179AFA61ABB';
+axios.defaults.headers["x-icode"] = "B5052179AFA61ABB";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={rootStore.store}>
+      <PersistGate loading={null} persistor={rootStore.persistor}>
+          <App/>
+      </PersistGate>
+  </Provider>
+</React.StrictMode>,
   document.getElementById("root")
 );
 
