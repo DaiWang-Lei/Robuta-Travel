@@ -24,7 +24,9 @@ export const rootReducer = combineReducers({
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const store = configureStore({ reducer: persistedReducer, middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), actionLog], devTools: true });
+// const store = configureStore({ reducer: persistedReducer, middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), actionLog], devTools: true });
+
+const store = createStore(persistedReducer, applyMiddleware(thunk));
 
 const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;

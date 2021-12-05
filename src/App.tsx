@@ -1,9 +1,19 @@
 import React from "react";
 import { HashRouter, Route, Switch } from "react-router-dom";
-import { HomePage, SignInPage, RegisterPage, DetailPage, NotFound } from "./pages";
+import { HomePage, SignInPage, RegisterPage, DetailPage, NotFound, ShoppingCart } from "./pages";
+import { Redirect } from "react-router-dom";
 import styles from "./App.module.css";
+import { useSelector } from "./redux/hooks";
+
+const PrivateRoute = ({ component, isAuthenticated, ...rest }: { component: any; isAuthenticated: boolean; path?: any }) => {
+  const routeComponent = (props: any) => {
+    return isAuthenticated ? React.createElement(component, props) : <Redirect to={{ pathname: "/signIn" }} />;
+  };
+  return <Route render={routeComponent} {...rest} />;
+};
 
 function App() {
+  const jwt = useSelector((state) => state.user.token);
   return (
     <div>
       {/* BrowserRouter  路由导航与原生浏览器操作行为一致 */}
@@ -15,7 +25,8 @@ function App() {
           <Route path="/signIn" component={SignInPage} />
           <Route path="/register" component={RegisterPage} />
           <Route path="/detail/:touristRouteId" component={DetailPage} />
-
+          <Route path="/detail/:touristRouteId" component={DetailPage} />
+          <PrivateRoute isAuthenticated={jwt !== null} path="/shoppingCart" component={ShoppingCart} />
           <Route component={NotFound} />
         </Switch>
       </HashRouter>
