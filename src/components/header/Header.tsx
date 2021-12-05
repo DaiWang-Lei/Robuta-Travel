@@ -6,8 +6,16 @@ import { useSelector } from "../../redux/hooks";
 import { GlobalOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 import { Layout, Typography, Input, Dropdown, Menu, Button } from "antd";
-import { useHistory, useLocation, useParams, useRouteMatch } from "react-router-dom";
-import { addLanguageActionCreator, changeLanguageActionCreator } from "../../redux/language/languageActions";
+import {
+  useHistory,
+  useLocation,
+  useParams,
+  useRouteMatch,
+} from "react-router-dom";
+import {
+  addLanguageActionCreator,
+  changeLanguageActionCreator,
+} from "../../redux/language/languageActions";
 import jwtDecode, { JwtPayload as DefaultJwtPayload } from "jwt-decode";
 import { userSlice } from "@/redux/user/slice";
 
@@ -35,6 +43,11 @@ export const Header: FC = (props) => {
   const { keywords } = useParams<MatchParams>();
   const [userName, setUserName] = useState<string | null>(null);
 
+  //获取购物车信息
+  const shoppingCartItems = useSelector((state) => state.shoppingCart.data);
+  const shoppingCartLoading = useSelector(
+    (state) => state.shoppingCart.loading
+  );
   const dispatch = useDispatch();
 
   const { t } = useTranslation();
@@ -64,7 +77,7 @@ export const Header: FC = (props) => {
   }, [jwt]);
 
   const onSignOut = () => {
-    dispatch(userSlice.actions.signOut())
+    dispatch(userSlice.actions.signOut());
     history.push("/");
   };
   const MenuHandlerClick = (e: { key: any }) => {
@@ -88,7 +101,9 @@ export const Header: FC = (props) => {
                 {languageList.map((item, index) => {
                   return <Menu.Item key={item.code}>{item.name}</Menu.Item>;
                 })}
-                <Menu.Item key={"new"}>{t("header.add_new_language")}</Menu.Item>
+                <Menu.Item key={"new"}>
+                  {t("header.add_new_language")}
+                </Menu.Item>
               </Menu>
             }
           >
@@ -96,7 +111,7 @@ export const Header: FC = (props) => {
           </Dropdown.Button>
           {jwt ? (
             <Button.Group className={styles["button-group"]}>
-              <span style={{marginRight:15}}>
+              <span style={{ marginRight: 15 }}>
                 {t("header.welcome")}
                 <Typography.Text strong={true}>{userName}</Typography.Text>
               </span>
@@ -104,8 +119,9 @@ export const Header: FC = (props) => {
                 onClick={() => {
                   history.push("/shoppingCart");
                 }}
+                loading={shoppingCartLoading}
               >
-                {t("header.shoppingCart")}
+                {t("header.shoppingCart") + `(${shoppingCartItems.length})`}
               </Button>
               <Button onClick={onSignOut}>{t("header.signOut")}</Button>
             </Button.Group>
@@ -142,7 +158,10 @@ export const Header: FC = (props) => {
             {t("header.title")}
           </Typography.Title>
         </span>
-        <Input.Search placeholder="请输入目的地" className={styles["search-input"]} />
+        <Input.Search
+          placeholder="请输入目的地"
+          className={styles["search-input"]}
+        />
       </Layout.Header>
 
       {/* 顶部菜单 */}

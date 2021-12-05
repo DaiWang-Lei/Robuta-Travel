@@ -1,13 +1,29 @@
 import React, { FC, useState, useEffect } from "react";
 import { RouteComponentProps, useParams } from "react-router-dom";
 import axios from "axios";
-import { Spin, DatePicker, Space, Row, Col, Divider, Typography, Anchor, Menu } from "antd";
+import {
+  Spin,
+  DatePicker,
+  Space,
+  Row,
+  Col,
+  Divider,
+  Typography,
+  Anchor,
+  Menu,
+  Button,
+} from "antd";
 import { Footer, Header, ProductIntro, ProductComments } from "@/components";
 import styles from "./Detail.module.css";
-import { getProductDetail, getProductComments } from "@/redux/productDetail/slice";
+import {
+  getProductDetail,
+  getProductComments,
+} from "@/redux/productDetail/slice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "../../redux/hooks";
 import { MainLayout } from "@/layouts/mainLayout";
+import { ShoppingCartOutlined } from "@ant-design/icons";
+import { addShoppingCartItem } from "@/redux/shoppingCart/slice";
 
 const { RangePicker } = DatePicker;
 
@@ -22,6 +38,10 @@ export const DetailPage: FC<RouteComponentProps<MatchProps>> = (props) => {
   const comments = useSelector((state) => state.productDetail.commnets);
   const dispatch = useDispatch();
 
+  const jwt = useSelector((state) => state.user.token);
+  const shoppingCartLoading = useSelector(
+    (state) => state.shoppingCart.loading
+  );
   //获取产品详情
   useEffect(() => {
     dispatch(getProductDetail(touristRouteId));
@@ -33,7 +53,18 @@ export const DetailPage: FC<RouteComponentProps<MatchProps>> = (props) => {
   }, [dispatch]);
 
   if (loading) {
-    return <Spin size="large" style={{ marginTop: 200, marginBottom: 200, marginLeft: "auto", marginRight: "auto", width: "100%" }} />;
+    return (
+      <Spin
+        size="large"
+        style={{
+          marginTop: 200,
+          marginBottom: 200,
+          marginLeft: "auto",
+          marginRight: "auto",
+          width: "100%",
+        }}
+      />
+    );
   }
   /** 后台接口出错，使用默认数据展示 */
   if (error) {
@@ -58,6 +89,21 @@ export const DetailPage: FC<RouteComponentProps<MatchProps>> = (props) => {
               />
             </Col>
             <Col span={11}>
+              <Button
+                style={{ marginTop: 50, marginBottom: 30, display: "block" }}
+                type="primary"
+                danger
+                loading={shoppingCartLoading}
+                onClick={() => {
+                  jwt &&
+                    dispatch(
+                      addShoppingCartItem({ jwt, touristRouteId: product.id })
+                    );
+                }}
+              >
+                <ShoppingCartOutlined />
+                加入购物车
+              </Button>
               <RangePicker open style={{ marginTop: 20 }} />
             </Col>
           </Row>

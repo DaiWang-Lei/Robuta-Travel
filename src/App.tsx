@@ -1,19 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { HashRouter, Route, Switch } from "react-router-dom";
-import { HomePage, SignInPage, RegisterPage, DetailPage, NotFound, ShoppingCart } from "./pages";
+import {
+  HomePage,
+  SignInPage,
+  RegisterPage,
+  DetailPage,
+  NotFound,
+  ShoppingCart,
+} from "./pages";
 import { Redirect } from "react-router-dom";
 import styles from "./App.module.css";
 import { useSelector } from "./redux/hooks";
+import { getShoppingCart } from "./redux/shoppingCart/slice";
+import { useDispatch } from "react-redux";
 
-const PrivateRoute = ({ component, isAuthenticated, ...rest }: { component: any; isAuthenticated: boolean; path?: any }) => {
+const PrivateRoute = ({
+  component,
+  isAuthenticated,
+  ...rest
+}: {
+  component: any;
+  isAuthenticated: boolean;
+  path?: any;
+}) => {
   const routeComponent = (props: any) => {
-    return isAuthenticated ? React.createElement(component, props) : <Redirect to={{ pathname: "/signIn" }} />;
+    return isAuthenticated ? (
+      React.createElement(component, props)
+    ) : (
+      <Redirect to={{ pathname: "/signIn" }} />
+    );
   };
   return <Route render={routeComponent} {...rest} />;
 };
 
 function App() {
   const jwt = useSelector((state) => state.user.token);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    jwt && dispatch(getShoppingCart(jwt));
+  }, [jwt]);
   return (
     <div>
       {/* BrowserRouter  路由导航与原生浏览器操作行为一致 */}
@@ -26,7 +51,11 @@ function App() {
           <Route path="/register" component={RegisterPage} />
           <Route path="/detail/:touristRouteId" component={DetailPage} />
           <Route path="/detail/:touristRouteId" component={DetailPage} />
-          <PrivateRoute isAuthenticated={jwt !== null} path="/shoppingCart" component={ShoppingCart} />
+          <PrivateRoute
+            isAuthenticated={jwt !== null}
+            path="/shoppingCart"
+            component={ShoppingCart}
+          />
           <Route component={NotFound} />
         </Switch>
       </HashRouter>

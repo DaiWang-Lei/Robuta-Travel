@@ -7,3 +7,4 @@ export * from "./businessPartners";
 export * from "./productIntro";
 export * from "./productComments";
 export * from "./paymentCard";
+export * from "./productList";
