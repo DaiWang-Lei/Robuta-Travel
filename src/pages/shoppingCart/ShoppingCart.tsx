@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import { MainLayout } from "@/layouts/mainLayout";
+import { MainLayout } from "../../layouts/mainLayout";
 import { Col, Row, Affix } from "antd";
-import { PaymentCard, ProductList } from "@/components";
+import { PaymentCard, ProductList } from "../../components";
 import { useDispatch } from "react-redux";
-import { useSelector } from "@/redux/hooks";
+import { useSelector } from "../../redux/hooks";
 import styles from "./ShoppingCart.module.css";
-import { checkOut, clearShoppingCart } from "@/redux/shoppingCart/slice";
+import { checkOut, clearShoppingCart } from "../../redux/shoppingCart/slice";
 import { useHistory } from "react-router-dom";
 
 export const ShoppingCart: React.FC = () => {

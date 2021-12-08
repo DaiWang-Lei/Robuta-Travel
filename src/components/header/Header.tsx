@@ -17,7 +17,7 @@ import {
   changeLanguageActionCreator,
 } from "../../redux/language/languageActions";
 import jwtDecode, { JwtPayload as DefaultJwtPayload } from "jwt-decode";
-import { userSlice } from "@/redux/user/slice";
+import { userSlice } from "../../redux/user/slice";
 
 interface MatchParams {
   keywords: string;
@@ -121,7 +121,7 @@ export const Header: FC = (props) => {
                 }}
                 loading={shoppingCartLoading}
               >
-                {t("header.shoppingCart") + `(${shoppingCartItems.length==undefined?0:shoppingCartItems.length})`}
+                {t("header.shoppingCart") + `(${shoppingCartItems==undefined?0:shoppingCartItems.length})`}
               </Button>
               <Button onClick={onSignOut}>{t("header.signOut")}</Button>
             </Button.Group>

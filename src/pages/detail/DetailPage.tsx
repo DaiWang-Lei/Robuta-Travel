@@ -13,17 +13,27 @@ import {
   Menu,
   Button,
 } from "antd";
-import { Footer, Header, ProductIntro, ProductComments } from "@/components";
+// import { Footer, Header, ProductIntro, ProductComments } from "@/components";
+import { Footer, Header, ProductIntro, ProductComments } from "../../components";
+
 import styles from "./Detail.module.css";
+
+// import {
+//   getProductDetail,
+//   getProductComments,
+// } from "@/redux/productDetail/slice";
 import {
   getProductDetail,
   getProductComments,
-} from "@/redux/productDetail/slice";
+} from "../../redux/productDetail/slice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "../../redux/hooks";
-import { MainLayout } from "@/layouts/mainLayout";
+// import { MainLayout } from "@/layouts/mainLayout";
 import { ShoppingCartOutlined } from "@ant-design/icons";
-import { addShoppingCartItem } from "@/redux/shoppingCart/slice";
+// import { addShoppingCartItem } from "@/redux/shoppingCart/slice";
+
+import { MainLayout } from "../../layouts/mainLayout";
+import { addShoppingCartItem } from "../../redux/shoppingCart/slice";
 
 const { RangePicker } = DatePicker;
 

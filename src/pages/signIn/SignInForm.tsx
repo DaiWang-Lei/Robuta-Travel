@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { Form, Input, Button, Checkbox } from "antd";
 import styles from "./SignInForm.module.css";
 import { useDispatch } from "react-redux";
-import { signIn } from "@/redux/user/slice";
-import { useSelector } from "@/redux/hooks";
+import { signIn } from "../../redux/user/slice";
+import { useSelector } from "../../redux/hooks";
 import { useHistory, useLocation } from "react-router-dom";
 
 export const SignInForm = () => {

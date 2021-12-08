@@ -9,7 +9,9 @@ import { ProductsListProps, getProductsActionCreator } from "../../redux/recomme
 
 import { useSelector } from "../../redux/hooks";
 import { useDispatch } from "react-redux";
-import { MainLayout } from "@/layouts/mainLayout";
+// import { MainLayout } from "./layouts/mainLayout";
+import { MainLayout } from "../../layouts/mainLayout";
+
 
 export const HomePage: FC = () => {
   const { t } = useTranslation();

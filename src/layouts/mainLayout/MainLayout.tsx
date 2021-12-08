@@ -1,5 +1,5 @@
 import React from "react";
-import { Header, Footer } from "@/components";
+import { Header, Footer } from "../../components";
 import styles from "./MainLayout.module.css";
 
 export const MainLayout: React.FC = ({ children }) => {

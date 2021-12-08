@@ -1,10 +1,16 @@
 import React from "react";
-import { MainLayout } from "@/layouts/mainLayout";
+// import { MainLayout } from "@/layouts/mainLayout";
+import { MainLayout } from '../../layouts/mainLayout';
 import { Col, Row } from "antd";
-import { CheckOutCard, PaymentForm } from "@/components";
-import { useSelector } from "@/redux/hooks";
+// import { CheckOutCard, PaymentForm } from "@/components";
+import { CheckOutCard, PaymentForm } from "../../components";
+
+// import { useSelector } from "@/redux/hooks";
+import { useSelector } from "../../redux/hooks";
+
 import { useDispatch } from "react-redux";
-import { placeOrder } from "@/redux/order/slice";
+// import { placeOrder } from "@/redux/order/slice";
+import { placeOrder } from "../../redux/order/slice";
 
 export const PlaceOrder: React.FC = () => {
   const jwt = useSelector((state) => state.user.token);
