@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "./static/css/main.85125b36.chunk.css",
-    "main.js": "./static/js/main.2a6dba5d.chunk.js",
-    "main.js.map": "./static/js/main.2a6dba5d.chunk.js.map",
-    "runtime-main.js": "./static/js/runtime-main.f1630ad3.js",
-    "runtime-main.js.map": "./static/js/runtime-main.f1630ad3.js.map",
-    "static/css/2.5f5f9133.chunk.css": "./static/css/2.5f5f9133.chunk.css",
-    "static/js/2.84409f24.chunk.js": "./static/js/2.84409f24.chunk.js",
-    "static/js/2.84409f24.chunk.js.map": "./static/js/2.84409f24.chunk.js.map",
-    "static/js/3.6d3d2a4d.chunk.js": "./static/js/3.6d3d2a4d.chunk.js",
-    "static/js/3.6d3d2a4d.chunk.js.map": "./static/js/3.6d3d2a4d.chunk.js.map",
+    "main.css": "./static/css/main.2f835557.chunk.css",
+    "main.js": "./static/js/main.de077d4a.chunk.js",
+    "main.js.map": "./static/js/main.de077d4a.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.95327fce.js",
+    "runtime-main.js.map": "./static/js/runtime-main.95327fce.js.map",
+    "static/css/2.ae9bec1b.chunk.css": "./static/css/2.ae9bec1b.chunk.css",
+    "static/js/2.1342176b.chunk.js": "./static/js/2.1342176b.chunk.js",
+    "static/js/2.1342176b.chunk.js.map": "./static/js/2.1342176b.chunk.js.map",
+    "static/js/3.a53a4b9e.chunk.js": "./static/js/3.a53a4b9e.chunk.js",
+    "static/js/3.a53a4b9e.chunk.js.map": "./static/js/3.a53a4b9e.chunk.js.map",
     "index.html": "./index.html",
-    "static/css/2.5f5f9133.chunk.css.map": "./static/css/2.5f5f9133.chunk.css.map",
-    "static/css/main.85125b36.chunk.css.map": "./static/css/main.85125b36.chunk.css.map",
-    "static/js/2.84409f24.chunk.js.LICENSE.txt": "./static/js/2.84409f24.chunk.js.LICENSE.txt",
+    "static/css/2.ae9bec1b.chunk.css.map": "./static/css/2.ae9bec1b.chunk.css.map",
+    "static/css/main.2f835557.chunk.css.map": "./static/css/main.2f835557.chunk.css.map",
+    "static/js/2.1342176b.chunk.js.LICENSE.txt": "./static/js/2.1342176b.chunk.js.LICENSE.txt",
     "static/media/castle.2f183a43.jpg": "./static/media/castle.2f183a43.jpg",
     "static/media/cave.1fedb68b.jpg": "./static/media/cave.1fedb68b.jpg",
     "static/media/cloudSea.409c5a7f.jpg": "./static/media/cloudSea.409c5a7f.jpg",
@@ -31,10 +31,10 @@
     "static/media/youtube.66777c45.png": "./static/media/youtube.66777c45.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.f1630ad3.js",
-    "static/css/2.5f5f9133.chunk.css",
-    "static/js/2.84409f24.chunk.js",
-    "static/css/main.85125b36.chunk.css",
-    "static/js/main.2a6dba5d.chunk.js"
+    "static/js/runtime-main.95327fce.js",
+    "static/css/2.ae9bec1b.chunk.css",
+    "static/js/2.1342176b.chunk.js",
+    "static/css/main.2f835557.chunk.css",
+    "static/js/main.de077d4a.chunk.js"
   ]
 }
