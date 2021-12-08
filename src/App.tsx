@@ -7,6 +7,7 @@ import {
   DetailPage,
   NotFound,
   ShoppingCart,
+  PlaceOrder,
 } from "./pages";
 import { Redirect } from "react-router-dom";
 import styles from "./App.module.css";
@@ -55,6 +56,11 @@ function App() {
             isAuthenticated={jwt !== null}
             path="/shoppingCart"
             component={ShoppingCart}
+          />
+          <PrivateRoute
+            isAuthenticated={jwt !== null}
+            path="/placeOrder"
+            component={PlaceOrder}
           />
           <Route component={NotFound} />
         </Switch>

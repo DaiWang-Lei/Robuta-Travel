@@ -9,6 +9,7 @@ import storage from "redux-persist/lib/storage";
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { actionLog } from "./middlewares/actionLog";
 import { shoppingCartSlice } from "./shoppingCart/slice";
+import { orderSlice } from "./order/slice";
 
 const persistConfig = {
   key: "root",
@@ -22,6 +23,7 @@ export const rootReducer = combineReducers({
   productDetail: productDetailSlice.reducer,
   user: userSlice.reducer,
   shoppingCart: shoppingCartSlice.reducer,
+  order: orderSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

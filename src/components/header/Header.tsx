@@ -121,7 +121,7 @@ export const Header: FC = (props) => {
                 }}
                 loading={shoppingCartLoading}
               >
-                {t("header.shoppingCart") + `(${shoppingCartItems.length})`}
+                {t("header.shoppingCart") + `(${shoppingCartItems.length==undefined?0:shoppingCartItems.length})`}
               </Button>
               <Button onClick={onSignOut}>{t("header.signOut")}</Button>
             </Button.Group>

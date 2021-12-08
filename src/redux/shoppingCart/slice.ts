@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { stat } from "fs";
 
@@ -58,6 +58,17 @@ export const clearShoppingCart = createAsyncThunk(
   }
 );
 
+export const checkOut = createAsyncThunk(
+  "shoppingCart/checkOut",
+  async (jwt: string) => {
+    const { data } = await axios.post("/api/shoppingCart/checkOut", null, {
+      headers: {
+        Authorization: `bearer ${jwt}`,
+      },
+    });
+    return data;
+  }
+);
 
 export const shoppingCartSlice = createSlice({
   name: "shoppingCart",
@@ -97,6 +108,18 @@ export const shoppingCartSlice = createSlice({
       state.error = null;
     },
     [clearShoppingCart.rejected.type]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    [checkOut.pending.type]: (state) => {
+      state.loading = true;
+    },
+    [checkOut.fulfilled.type]: (state, action) => {
+      state.data = action.payload;
+      state.loading = false;
+      state.error = null;
+    },
+    [checkOut.rejected.type]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },

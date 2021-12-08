@@ -8,3 +8,5 @@ export * from "./productIntro";
 export * from "./productComments";
 export * from "./paymentCard";
 export * from "./productList";
+export * from "./paymentForm";
+export * from "./checkOutCard";
